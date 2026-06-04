@@ -6,10 +6,20 @@ Tired of reaching for that mouse like some sort of *peasant*? LazyMouse hijacks 
 
 It uses MediaPipe, OpenCV, and PyAutoGUI to track your finger, smooth out the shakes, and detect downward taps as clicks — all without touching a single physical object.
 
+### System tray
+
+A tray icon appears in your menu bar (macOS) or system tray (Windows) when LazyMouse runs.
+
+- **Green circle** = tracking is ON
+- **Gray circle** = tracking is OFF
+- **Toggle** — pause/resume tracking without quitting
+- **Quit** — exit the app
+
 ### One-time setup (macOS / Linux)
 
 ```bash
 ./setup.sh
+.miniforge3/envs/lazymouse/bin/pip install pystray Pillow
 ```
 
 ### One-time setup (Windows)
@@ -17,7 +27,7 @@ It uses MediaPipe, OpenCV, and PyAutoGUI to track your finger, smooth out the sh
 ```powershell
 conda create -n lazymouse python=3.12 -y
 conda activate lazymouse
-pip install opencv-python mediapipe pyautogui numpy
+pip install opencv-python mediapipe pyautogui numpy pystray Pillow
 ```
 
 ### Launch
