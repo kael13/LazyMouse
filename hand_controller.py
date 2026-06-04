@@ -47,6 +47,8 @@ class HandController:
         self._roi_min = ROI_MARGIN
         self._roi_max = 1.0 - ROI_MARGIN
         self._roi_range = 1.0 - 2 * ROI_MARGIN
+        self.enabled = True
+        self.running = True
 
     def _norm_to_screen(self, nx, ny):
         return int((nx - self._roi_min) / self._roi_range * SCREEN_WIDTH), \
@@ -106,17 +108,20 @@ class HandController:
         print("Press Ctrl+C to quit.")
 
         try:
-            while True:
+            while self.running:
                 ret, frame = self.cap.read()
                 if not ret:
                     print("Error: Failed to capture frame.")
                     break
 
-                frame = cv2.flip(frame, 1)no
+                frame = cv2.flip(frame, 1)
                 rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 results = self.hands.process(rgb)
 
                 if results.multi_hand_landmarks:
+                    if not self.enabled:
+                        continue
+
                     hand = results.multi_hand_landmarks[0]
                     tip = hand.landmark[8]
 

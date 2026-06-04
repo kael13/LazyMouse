@@ -2,3 +2,5 @@ opencv-python
 mediapipe
 pyautogui
 numpy
+pystray
+Pillow
